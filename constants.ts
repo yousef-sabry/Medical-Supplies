@@ -120,13 +120,13 @@ export const CATEGORIES: Category[] = [
     id: '1',
     name: { en: 'Respirators', ar: 'أجهزة تنفس' },
     icon: 'activity',
-    image: './assets/category1.jpg',
+    image: './public/category1.jpg',
   },
   {
     id: '2',
     name: { en: 'Blood glucose meters and strips', ar: 'أجهزة وشرايط سكر' },
     icon: 'stethoscope',
-    image: './assets/category2.jpg',
+    image: './publiccategory2.jpg',
   },
   {
     id: '3',

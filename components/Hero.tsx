@@ -90,7 +90,7 @@ const Hero = () => {
                 {/* Main Image */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white w-100 h-80 mx-auto">
   <img 
-    src="../assets/photo1.jpg" 
+    src="../public/photo1.jpg" 
     alt="Medical Professional" 
     className="w-full h-full object-cover"
   />
