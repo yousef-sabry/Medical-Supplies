@@ -87,7 +87,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       vision: 'رؤيتنا: أن نكون الموزع الطبي الرائد في المنطقة.',
     },
     footer: {
-      rights: '© 2024 الأندلس للمستلزمات الطبية. جميع الحقوق محفوظة.',
+      rights: '© 2025 الأندلس للمستلزمات الطبية. جميع الحقوق محفوظة. تم انشاء ذلك الموقع بواسطة يوسف صبري ',
       contactUs: 'اتصل بنا',
       quickLinks: 'روابط سريعة',
     },
@@ -120,31 +120,31 @@ export const CATEGORIES: Category[] = [
     id: '1',
     name: { en: 'Respirators', ar: 'أجهزة تنفس' },
     icon: 'activity',
-    image: './public/category1.jpg',
+    image: 'category1.jpg',
   },
   {
     id: '2',
     name: { en: 'Blood glucose meters and strips', ar: 'أجهزة وشرايط سكر' },
-    icon: 'stethoscope',
-    image: './publiccategory2.jpg',
+    icon: 'droplet',
+    image: 'category2.jpg',
   },
   {
     id: '3',
-    name: { en: 'Hospital Furniture', ar: 'أثاث المستشفيات' },
-    icon: 'bed',
-    image: 'https://picsum.photos/id/3/400/300',
+    name: { en: 'Pressure devices', ar: 'أجهزة الضغط ' },
+    icon: 'heart-pulse',
+    image: 'category3.jpg',
   },
   {
     id: '4',
-    name: { en: 'Disposables', ar: 'مستلزمات استهلاكية' },
-    icon: 'trash-2',
-    image: 'https://picsum.photos/id/4/400/300',
+    name: { en: 'Wheelchairs', ar: 'كراسي متحركة' },
+    icon: 'wheelchair',
+    image: 'category4.jpg',
   },
   {
     id: '5',
     name: { en: 'Lab Equipment', ar: 'معدات معملية' },
     icon: 'flask',
-    image: 'https://picsum.photos/id/5/400/300',
+    image: 'category5.jpg',
   },
 ];
 
@@ -152,37 +152,37 @@ export const PRODUCTS: Product[] = [
   {
     id: '101',
     name: { en: 'Digital Stethoscope', ar: 'سماعة طبية رقمية' },
-    category: 'Diagnostic',
+    category: 'Lab Equipment',
     price: 150.00,
     rating: 4.8,
-    image: 'https://picsum.photos/id/201/300/300',
+    image: 'product1.jpg',
     description: { en: 'High precision digital stethoscope for professionals.', ar: 'سماعة طبية رقمية عالية الدقة للمحترفين.' }
   },
   {
     id: '102',
-    name: { en: 'Surgical Kit Pro', ar: 'طقم جراحي احترافي' },
-    category: 'Surgical',
+    name: { en: 'Digital blood pressure monitor', ar: 'جهاز ضغط رقمي (ديجتال)' },
+    category: 'Pressure devices',
     price: 320.50,
     rating: 4.9,
-    image: 'https://picsum.photos/id/202/300/300',
-    description: { en: 'Complete stainless steel surgical instrument set.', ar: 'طقم أدوات جراحية كامل من الفولاذ المقاوم للصدأ.' }
+    image: 'product2.jpg',
+    description: { en: 'High-accuracy digital blood pressure monitor with easy operation and clear instant readings.', ar: 'جهاز قياس ضغط رقمي عالي الدقة، سهل الاستخدام ويعرض النتائج فورًا بوضوح.' }
   },
   {
     id: '103',
-    name: { en: 'Medical Face Masks', ar: 'كمامات طبية' },
-    category: 'Disposables',
-    price: 15.00,
+    name: { en: 'Digital ventilator', ar: 'جهاز تنفس رقمي (ديجتال)' },
+    category: 'Respirators',
+    price: 800.00,
     rating: 4.5,
-    image: 'https://picsum.photos/id/203/300/300',
-    description: { en: 'Box of 50 3-ply medical grade face masks.', ar: 'علبة 50 كمامة طبية ثلاثية الطبقات.' }
+    image: 'product3.jpg',
+    description: { en: 'Portable nebulizer that delivers a fine mist for easier and more effective breathing.', ar: 'جهاز بخاخ تنفس محمول يوفر رذاذًا ناعمًا لتسهيل عملية التنفس بفعالية وسهولة.' }
   },
   {
     id: '104',
-    name: { en: 'Electric Hospital Bed', ar: 'سرير مستشفى كهربائي' },
-    category: 'Furniture',
-    price: 1200.00,
+    name: { en: 'Sugar requirements', ar: 'شرايط سكر' },
+    category: 'Blood glucose meters and strips',
+    price: 300.00,
     rating: 5.0,
-    image: 'https://picsum.photos/id/204/300/300',
-    description: { en: 'Fully adjustable electric bed with remote control.', ar: 'سرير كهربائي قابل للتعديل بالكامل مع جهاز تحكم عن بعد.' }
+    image: 'product4.jpg',
+    description: { en: 'Accurate and easy-to-use glucose test strips for fast, reliable results.', ar: 'شرائط قياس سكر دقيقة وسهلة الاستخدام لنتائج سريعة وموثوقة' }
   },
 ];

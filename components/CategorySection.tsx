@@ -58,7 +58,7 @@ const CategorySection = () => {
             const Icon = iconMap[category.icon] || Activity;
             return (
               <Link 
-                to={`/products?category=${category.id}`} 
+                to={`/products?category=${category.name.en}`} 
                 key={category.id}
                 className="min-w-[280px] snap-start group relative rounded-2xl overflow-hidden cursor-pointer"
               >

@@ -1,10 +1,12 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef , useEffect} from 'react';
 import ProductCard from '../components/ProductCard';
 import { PRODUCTS } from '../constants';
 import { useLanguage } from '../components/LanguageContext';
 import { Search, SlidersHorizontal, X, ChevronDown, Filter, Star, ArrowUpDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { useLocation } from 'react-router-dom';
+
 
 const Products = () => {
   const { t, language, dir } = useLanguage();
@@ -16,6 +18,10 @@ const Products = () => {
   const [priceRange, setPriceRange] = useState(2000); // Default max price
   const [sortBy, setSortBy] = useState('featured');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+const location = useLocation();
+const queryParams = new URLSearchParams(location.search);
+const categoryFromURL = queryParams.get('category'); // الاسم اللي جاي من CategorySection
 
   // Derive unique categories from available products
   const uniqueCategories = useMemo(() => {
@@ -44,6 +50,12 @@ const Products = () => {
       { y: 0, opacity: 1, scale: 1, stagger: 0.05, duration: 0.5, ease: "power2.out", clearProps: "all" }
     );
   }, { scope: containerRef, dependencies: [filteredProducts] });
+
+  useEffect(() => {
+  if (categoryFromURL) {
+    setSelectedCategory(categoryFromURL);
+  }
+}, [categoryFromURL]);
 
   // Translation helpers for static UI elements in this page
   const ui = {

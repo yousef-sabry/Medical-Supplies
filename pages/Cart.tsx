@@ -5,6 +5,7 @@ import { Trash2, Plus, Minus, ArrowRight, ArrowLeft, ShoppingBag, X, MessageCirc
 import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import emailjs from '@emailjs/browser';
 
 // Type for a cart item
 interface CartItem {
@@ -99,59 +100,60 @@ const Cart = () => {
     return new Promise((resolve) => setTimeout(resolve, 1500));
   };
 
-  const handleCheckoutSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // داخل handleCheckoutSubmit بدل الدالة التجريبية sendOrderEmail
+const handleCheckoutSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // 1. Format the Order Details
-    const itemsList = cartItems.map(item => {
-      const product = getProduct(item.productId);
-      // Fallback to English name if product not found to ensure log readability
-      const productName = product ? (product.name['en'] || product.name['ar']) : 'Unknown Item';
-      return `- ${productName} (x${item.quantity}) - $${(product ? product.price * item.quantity : 0).toFixed(2)}`;
-    }).join('\n');
+  const itemsList = cartItems.map(item => {
+    const product = getProduct(item.productId);
+    const productName = product ? (product.name['en'] || product.name['ar']) : 'Unknown Item';
+    return `- ${productName} (x${item.quantity}) - $${(product ? product.price * item.quantity : 0).toFixed(2)}`;
+  }).join('\n');
 
-    const totalFormatted = `$${total.toFixed(2)}`;
+  const totalFormatted = `$${total.toFixed(2)}`;
 
-    // 2. Construct the Email Body
-    const emailBody = `
-      NEW ORDER RECEIVED
-      ------------------
-      Customer Details:
-      Name: ${customerInfo.name}
-      Phone: ${customerInfo.phone}
-      Address: ${customerInfo.address}
-
-      Order Items:
-      ${itemsList}
-
-      ------------------
-      TOTAL: ${totalFormatted}
-      Shipping: ${shipping === 0 ? 'Free' : `$${shipping}`}
-      ------------------
-    `;
-
-    try {
-      // 3. Call the placeholder function
-      await sendOrderEmail(emailBody);
-
-      // 4. Success Handling
-      alert(language === 'en' 
-        ? `Order placed successfully! A notification has been sent to ${ADMIN_EMAIL}` 
-        : `تم الطلب بنجاح! تم إرسال إشعار إلى ${ADMIN_EMAIL}`
-      );
-      
-      setCartItems([]);
-      setIsCheckoutOpen(false);
-      setCustomerInfo({ name: '', phone: '', address: '' });
-
-    } catch (error) {
-      console.error("Failed to place order", error);
-      alert(language === 'en' ? "Something went wrong. Please try again." : "حدث خطأ ما. يرجى المحاولة مرة أخرى.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const templateParams = {
+    to_email: ADMIN_EMAIL,
+    subject: 'New Order Notification',
+    customer_name: customerInfo.name,
+    customer_phone: customerInfo.phone,
+    customer_address: customerInfo.address,
+    order_items: itemsList,
+    total_price: totalFormatted,
+    shipping: shipping === 0 ? 'Free' : `$${shipping}`
   };
+
+  try {
+    const response = await emailjs.send(
+      'service_q97reau',    // ضع هنا Service ID الخاص بك
+      'template_qud2g4e',  // ضع هنا Template ID الخاص بك
+      templateParams,
+      'OGNhxEPfzcU3frNcr'  // ضع هنا Public Key
+    );
+
+    console.log("Email sent successfully:", response);
+
+    alert(language === 'en' 
+      ? `Order placed successfully! A notification has been sent to ${ADMIN_EMAIL}` 
+      : `تم الطلب بنجاح! تم إرسال إشعار إلى ${ADMIN_EMAIL}`
+    );
+
+    setCartItems([]);
+    setIsCheckoutOpen(false);
+    setCustomerInfo({ name: '', phone: '', address: '' });
+
+  } catch (error: any) {
+    console.error("Failed to place order", error);
+    alert(language === 'en' 
+      ? `Something went wrong. ${error.text || ''}` 
+      : `حدث خطأ ما. يرجى المحاولة مرة أخرى. ${error.text || ''}`
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   if (cartItems.length === 0 && !isCheckoutOpen) {
     return (
